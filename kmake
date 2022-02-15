@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+	MACHINE_TYPE=`uname -m`
+	if [[ "$MACHINE_TYPE" == "armv"* ]]; then
+		`dirname "$0"`/kmake-linuxarm "$@"
+	elif [[ "$MACHINE_TYPE" == "aarch64"* ]]; then
+		`dirname "$0"`/kmake-linuxaarch64 "$@"
+	else
+		`dirname "$0"`/kmake-linux64 "$@"
+	fi
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+	`dirname "$0"`/kmake-osx "$@"
+elif [[ "$OSTYPE" == "FreeBSD"* ]]; then
+	`dirname "$0"`/kmake-freebsd "$@"
+fi
